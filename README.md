@@ -16,7 +16,7 @@ apt-get install -y curl
 Then simply run this command
 
 ```
-SUPERVISOR_PWD=SecretPassword SUPERVISOR_USER=admin SUPERVISOR_PORT=8080 bash <(curl -s "https://raw.githubusercontent.com/Scorpio1337/docker-master-install/master/linux.sh")
+SUPERVISOR_PWD=SecretPassword SUPERVISOR_USER=admin SUPERVISOR_PORT=8080 bash <(curl -s "https://raw.githubusercontent.com/bouchal/docker-master-install/master/linux.sh")
 ```
 
 __Only required variable is `SUPERVISOR_PWD`.__
