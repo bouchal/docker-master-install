@@ -16,7 +16,18 @@ apt-get install -y curl
 Then simply run this command
 
 ```
-SUPERVISOR_PWD=SecretPassword SUPERVISOR_USER=admin SUPERVISOR_PORT=8080 bash <(curl -s "https://raw.githubusercontent.com/bouchal/docker-master-install/master/linux.sh")
+SUPERVISOR_PORT=8080 \
+SUPERVISOR_USERNAME=admin \
+SUPERVISOR_PWD=SecretPassword \
+\
+INSTALL_SCRIPT=$(curl -s "https://raw.githubusercontent.com/bouchal/docker-master-install/master/linux.sh") \
+&& CHECKSUM=$(sha256sum <(echo -n $INSTALL_SCRIPT)  | cut -d ' ' -f 1) \
+&& if [ "$CHECKSUM" != "269522dd5e7d5cff551e6fdde3694f0d048bc496af466619858cf6654cfeddf9" ]; then echo "INSTALL SCRIPT CHECKSUM DON'T MACH"; else \
+	SUPERVISOR_PORT=$SUPERVISOR_PORT \
+	SUPERVISOR_USERNAME=$SUPERVISOR_USERNAME \
+	SUPERVISOR_PWD=$SUPERVISOR_PWD \
+	bash <(echo "$INSTALL_SCRIPT"); \
+fi;
 ```
 
 __Only required variable is `SUPERVISOR_PWD`.__
